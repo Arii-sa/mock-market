@@ -9,11 +9,18 @@
     <div class="content-top">
         <div class="user-info">
             <div class="user-image">
-                @if(!empty($profile->img_url))
-                    <img class="profile__image" src="{{ asset('storage/' . $profile->img_url) }}" alt="プロフィール画像" >
-                @else
-                    <div class="profile__image profile__image--default"></div>
+                @php
+                    $imgPath = $profile->img_url ? asset('storage/' . $profile->img_url) : null;
+                @endphp
+
+                @if($imgPath)
+                    <img class="profile__image" src="{{ $imgPath }}" 
+                        alt="プロフィール画像"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                 @endif
+
+                <div class="profile__image profile__image--default" 
+                    style="{{ $imgPath ? 'display:none;' : '' }}"></div>
             </div>
             <div class="user-name">
                     <h3 class="name__title">{{ $user->name }} </h3>
@@ -51,6 +58,12 @@
                             src="{{ asset('storage/' . $item->img_url) }}"
                             alt="{{ $item->name }}">
                     </a>
+
+                    {{-- ★購入済みならSold表示★ --}}
+                    @if(method_exists($item, 'isSold') ? $item->isSold() : (isset($item->sold_item) && $item->sold_item))
+                        <span class="item__sold">Sold</span>
+                    @endif
+
                     <p class="item__name">{{ $item->name }}</p>
                 </div>
             @empty

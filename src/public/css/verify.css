@@ -8,8 +8,8 @@
 }
 
 .verify__text {
-    font-weight: bold;   /* 太字 */
-    margin-bottom: 20px; /* 下に余白 */
+    font-weight: bold;
+    margin-bottom: 20px;
     font-size: 16px;
     color: #333;
 }

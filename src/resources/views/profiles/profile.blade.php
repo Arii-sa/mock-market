@@ -20,11 +20,18 @@
             {{-- プロフィール画像 --}}
             <div class="form__image">
                 <div class="form-group__image">
-                    @if(!empty($profile->img_url))
-                        <img class="profile__image" src="{{ asset('storage/' . $profile->img_url) }}" alt="プロフィール画像" >
-                    @else
-                        <div class="profile__image profile__image--default"></div>
-                    @endif
+                @php
+                    $imgPath = $profile->img_url ? asset('storage/' . $profile->img_url) : null;
+                @endphp
+
+                @if($imgPath)
+                    <img class="profile__image" src="{{ $imgPath }}" alt="プロフィール画像" 
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                @endif
+
+                {{-- 画像がない時のグレー丸 --}}
+                <div class="profile__image profile__image--default" 
+                    style="{{ $imgPath ? 'display:none;' : '' }}"></div>
                 </div>
                 <div class="form-group__button">
                     <label for="img_url" class="image__label">画像を選択する</label>

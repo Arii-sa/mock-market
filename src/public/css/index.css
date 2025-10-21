@@ -1,4 +1,4 @@
-/* --- 商品一覧 --- */
+
 .product-content {
     margin: 0 auto;
     max-width: 1230px;
@@ -8,7 +8,6 @@
     width: 100%;
 }
 
-/* --- タブ --- */
 .product__tab {
     display: flex;
     gap: 20px;
@@ -18,7 +17,7 @@
 
 .tab__name{
     text-decoration: none;
-    color: #666; /* 非アクティブ時はグレー */
+    color: #666;
     padding: 5px 10px;
     margin-left: 20px;
     font-weight: bold;
@@ -26,10 +25,9 @@
 }
 
 .tab__name.active{
-    color: #c00; /* アクティブ時は赤 */
+    color: #c00;
 }
 
-/* --- 商品グリッド --- */
 .product__item {
     width: 100%;
     border-top: 2px solid #ddd;
@@ -39,25 +37,22 @@
 .item__cards {
     margin-top: 30px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 横4列 */
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
 }
 
-/* --- 商品カード --- */
 .item-card {
-    position: relative; /* Soldラベルを重ねるため */
+    position: relative;
     padding: 10px;
 }
 
-
-/* --- 画像 --- */
 .card__link {
     display: block;
 }
 
 .card__image {
     width: 100%;
-    aspect-ratio: 1 / 1; /* 正方形に固定 */
+    aspect-ratio: 1 / 1;
     object-fit: cover;
     border-radius: 6px;
 }
@@ -73,7 +68,6 @@
     margin: 5px;
 }
 
-/* --- Sold ラベル --- */
 .card__sold {
     position: absolute;
     top: 8px;

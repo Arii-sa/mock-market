@@ -13,18 +13,14 @@ max-width: 1230px;
 }
 
 
-
-/* =========================================
-   1400〜1540px（PC幅）だけ反映
-========================================= */
 @media (min-width: 1400px) and (max-width: 1540px) {
     .header__title {
-        max-width: 95%; /* 少し狭めて中央寄せ維持 */
+        max-width: 95%;
         padding: 15px;
     }
 
     .header__logo-img {
-        height: 50px; /* ロゴを少しだけ小さく */
+        height: 50px;
         padding: 12px;
     }
 }

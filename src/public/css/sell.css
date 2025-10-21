@@ -39,7 +39,6 @@
     margin-bottom: 10px;
 }
 
-/* 入力系要素 */
 .detail-text {
     width: 100%;
     padding: 10px;
@@ -97,14 +96,14 @@ color: #fff;
     display: inline-block;
     padding: 8px 16px;
     border: 1px solid #f40303;
-    border-radius: 25px; /* 丸くする */
+    border-radius: 25px;
     color: #f40303;
     background-color: #fff;
     cursor: pointer;
     transition: 0.2s;
 }
 
-/* ✅ 選択時（赤色） */
+
 .category-item:checked + .item-category {
     background-color: #f40303;
     color: #fff;
@@ -118,9 +117,7 @@ color: #fff;
     margin-top: 5px;
 }
 
-/* =========================
-   出品ボタン
-========================= */
+
 .content-button {
     text-align: center;
     margin-top: 40px;

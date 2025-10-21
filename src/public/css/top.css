@@ -1,9 +1,8 @@
-/* ヘッダー全体 */
+
 .header {
     background: #000;
 }
 
-/* コンテンツ横並び */
 .header__content {
     margin: 0 auto;
     padding: 10px 15px;
@@ -13,13 +12,11 @@
     justify-content: space-between;
 }
 
-/* ロゴ */
 .header__logo-img {
     padding: 10px;
-    height: 50px; /* 高さは調整可 */
+    height: 50px;
 }
 
-/* 検索フォーム */
 .search {
     flex: 1;
     text-align: center;
@@ -40,16 +37,12 @@
     padding-left: 10px;
 }
 
-
-
-/* ナビゲーション（右側） */
 .button {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-/* ログアウト・マイページ  */
 .logout__button,
 .login__button,
 .mypage__button {
@@ -58,7 +51,6 @@
     text-decoration: none;
 }
 
-/* 出品ボタン  */
 .sell__button {
     background-color: white;
     color: black;
@@ -75,29 +67,29 @@
 
 @media screen and (min-width: 1400px) and (max-width: 1540px) {
     body {
-        max-width: 100%;       /* コンテンツの最大幅を固定 */
-        margin: 0 auto;          /* 中央寄せ */
+        max-width: 100%;
+        margin: 0 auto;
     }
 
     .header__content {
         width: 90%;
         max-width: 1400px;
-        margin: 0 auto;          /* 中央寄せ */
+        margin: 0 auto;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 40px;               /* 要素の間に適度な余白 */
+        gap: 40px;
     }
 
     .search__text {
-        width: 60%;              /* 検索フォームの幅を抑える */
-        min-width: 400px;        /* 小さくなりすぎ防止 */
-        max-width: 600px;        /* 大きくなりすぎ防止 */
+        width: 60%;
+        min-width: 400px;
+        max-width: 600px;
     }
 
     .button {
         display: flex;
-        gap: 20px;               /* ボタン間のバランス調整 */
+        gap: 20px;
     }
 
     main {

@@ -3,8 +3,6 @@
 〜環境構築〜
 
 ⑴　リポジトリ設定
-    $ git clone git@github.com:Estra-Coachtech/laravel-docker-template.git
-    $ mv laravel-docker-template mock-market
 
 ⑵　dockerの設定
     $ docker-compose up -d --build
@@ -30,10 +28,10 @@
 　　※ 使用するurl :  http://localhost/
 
 ⑹　テーブル ($ php artisan make:migration create_⚪︎⚪︎_table　で作成済み。)
-　　
-⑺　マイグレーション実行
-    $php artisan migrate
+   table.pngにて構図あり
 
+⑺マイグレーション実行
+    $php artisan migrate
     ※ 使用するurl : http://localhost:8080/
 
 ⑻　シーディング実行

@@ -12,7 +12,6 @@
     margin: 10px;
 }
 
-/* 左側 */
 .content-left {
     flex: 2;
 }
@@ -100,9 +99,14 @@
     white-space: nowrap;
 }
 
-/* 右側 */
 .content-right {
     flex: 1;
+}
+
+.right-grid {
+    display: grid;
+    grid-template-rows: auto min-content; /* summary-box 上、ボタン下 */
+    gap: 20px;
 }
 
 .summary-box {
