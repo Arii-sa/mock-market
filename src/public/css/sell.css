@@ -1,0 +1,144 @@
+.sell-content {
+    max-width: 700px;
+    margin: 50px auto;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.title-top {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 10px;
+}
+
+.content-title{
+    border-bottom: 2px solid #ccc;
+}
+
+.title-text{
+    margin-bottom: 3px;
+}
+
+.content-form {
+    width: 100%;
+}
+
+.content-detail {
+    margin-bottom: 25px;
+}
+
+.sell-detail{
+    margin: 20px 0px;
+}
+
+.detail-title {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* 入力系要素 */
+.detail-text {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.item-explain {
+    resize: none;
+}
+
+
+.img-box {
+    border: 1px dashed #ccc;
+    border-radius: 6px;
+    padding: 30px;
+    text-align: center;
+}
+
+.upload-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid #f40303;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #f40303;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.upload-btn:hover {
+background-color: #f40303;
+color: #fff;
+}
+
+
+.item-img {
+    display: block;
+    margin: 0 auto;
+}
+
+.category-select {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.category-item {
+    display: none;
+}
+
+.item-category {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid #f40303;
+    border-radius: 25px; /* 丸くする */
+    color: #f40303;
+    background-color: #fff;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* ✅ 選択時（赤色） */
+.category-item:checked + .item-category {
+    background-color: #f40303;
+    color: #fff;
+    border-color: #f40303;
+}
+
+
+.item-error {
+    color: red;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+/* =========================
+   出品ボタン
+========================= */
+.content-button {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.sell-button {
+    background-color: #f40303;
+    color: #fff;
+    border: none;
+    padding: 12px 40px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+}
+
+.sell-button:hover {
+    background-color: #c90202;
+}

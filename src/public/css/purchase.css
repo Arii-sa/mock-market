@@ -1,0 +1,136 @@
+.purchase-content {
+    margin: 0 auto;
+    max-width: 1230px;
+}
+
+.content-all {
+    display: flex;
+    gap: 40px;
+    max-width: 1200px;
+    width: 100%;
+    padding: 40px;
+    margin: 10px;
+}
+
+/* 左側 */
+.content-left {
+    flex: 2;
+}
+
+.content-left__top {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.content-left__img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+}
+
+.item-name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.item-price {
+    font-size: 18px;
+    color: #333;
+}
+
+/* 支払い方法 */
+.payment-section {
+    margin-top: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+}
+
+.payment-title {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.select-wrapper {
+    width: 100%;
+}
+
+.payment-select {
+    width: 30%;
+    padding: 3px 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-left: 50px;
+}
+
+.error {
+    color: #e63946;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+/* 配送先 */
+.address-section {
+    margin-top: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.address-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.address-title {
+    font-size: 16px;
+    margin: 0;
+}
+
+.address-change {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+/* 右側 */
+.content-right {
+    flex: 1;
+}
+
+.summary-box {
+    border: 1px solid #ccc;
+    overflow: hidden;
+    margin-bottom: 50px;
+}
+
+.summary-row:first-child {
+    border-bottom: 1px solid #ccc;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 20px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.purchase__button {
+    width: 100%;
+    background-color: #ff6b6b;
+    color: #fff;
+    padding: 12px 0;
+    border: none;
+    border-radius: 3px;
+    font-size: 16px;
+    cursor: pointer;
+}

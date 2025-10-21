@@ -1,0 +1,25 @@
+.verify__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+}
+
+.verify__text {
+    font-weight: bold;   /* 太字 */
+    margin-bottom: 20px; /* 下に余白 */
+    font-size: 16px;
+    color: #333;
+}
+
+.verify__button--resend {
+    background: none;
+    border: none;
+    font-size: 14px;
+    color: #1975c5;
+    text-decoration: none;
+    cursor: pointer;
+}
+

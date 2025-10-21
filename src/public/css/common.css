@@ -1,0 +1,30 @@
+.header {
+background: #000;
+}
+
+.header__title {
+margin: 0 auto;
+padding: 20px 15px;
+max-width: 1230px;
+}
+
+.header__logo-img {
+    padding: 15px;
+}
+
+
+
+/* =========================================
+   1400〜1540px（PC幅）だけ反映
+========================================= */
+@media (min-width: 1400px) and (max-width: 1540px) {
+    .header__title {
+        max-width: 95%; /* 少し狭めて中央寄せ維持 */
+        padding: 15px;
+    }
+
+    .header__logo-img {
+        height: 50px; /* ロゴを少しだけ小さく */
+        padding: 12px;
+    }
+}

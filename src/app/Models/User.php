@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -41,4 +41,37 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(\App\Models\Like::class);
+    }
+
+    // likedItems (Item のコレクションを取得)
+    public function likedItems()
+    {
+        // likes テーブルを中間テーブルとして items に紐付け
+        return $this->belongsToMany(\App\Models\Item::class, 'likes', 'user_id', 'item_id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function soldItems()
+    {
+        return $this->hasMany(SoldItem::class);
+    }
+
 }

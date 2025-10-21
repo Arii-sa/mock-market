@@ -1,0 +1,135 @@
+.profile-form {
+    margin: 0 auto;
+    padding: 10px 15px;
+    max-width: 1230px;
+    background-color: #fff;
+}
+
+/* 中央寄せ & 幅60% */
+.profile-form__content {
+    width: 55%;
+    margin: 0 auto;
+}
+
+/* タイトル */
+.content__title h2 {
+    text-align: center;
+    margin: 20px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* フォーム全体 */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* 各グループ */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+/* プロフィール画像 + ボタン横並び */
+.form__image {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* アイコン部分 */
+.form-group__image {
+    flex-shrink: 0;
+}
+
+.profile__image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;   /* 丸型 */
+    object-fit: cover;
+    border: 2px solid #ccc;
+}
+
+/* 未設定のときのグレーアイコン */
+.profile__image--default {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ccc;
+    font-size: 14px;
+    border: 2px solid #ccc;
+}
+
+/* 画像アップロードボタン */
+.form-group__button {
+    margin: 0px 15px;
+}
+
+.image__label {
+    display: inline-block;
+    padding: 8px 20px;
+    color: #c00;
+    border: 2px solid #c00;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+/* ラベル */
+.group__title {
+    margin-bottom: 4px;
+}
+
+.group__name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #444;
+}
+
+/* 入力欄 */
+.group__text input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border 0.3s;
+}
+
+.group__text input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* エラーメッセージ */
+.text__error {
+    color: #c00;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+/* 送信ボタン */
+.profile__button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 30px;
+    background-color: #ff0015;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+

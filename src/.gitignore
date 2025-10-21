@@ -13,3 +13,31 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+
+.env.testing
+/docker/mysql/data
+/storage/logs/*.log
+
+# OS自動生成ファイル
+.DS_Store
+Thumbs.db
+
+# 依存ロックファイル（個人開発なら残してもOK）
+composer.lock
+package-lock.json
+
+# Laravel キャッシュやセッション（任意）
+/storage/framework/*
+
+
+# OS temporary files
+.DS_Store
+Thumbs.db
+
+
+composer.lock
+package-lock.json
+
+# Laravel cache and compiled files
+/storage/framework/*
+/bootstrap/cache/*
