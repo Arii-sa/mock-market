@@ -11,11 +11,14 @@ use App\Models\Profile;
 
 class ProfileController extends Controller
 {
-    //
+    // 初回プロフィール設定
     public function create()
     {
-        return view('profiles.profile'); // 初回プロフィール設定 Blade
+        $profile = auth()->user()->profile; // null OK
+
+        return view('profiles.profile', compact('profile'));
     }
+
 
     public function store(ProfileRequest $request)
     {

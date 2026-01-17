@@ -36,29 +36,42 @@
                 <div class="item__likes">
                     {{-- いいね --}}
                     <div class="like-box">
-                    @auth
-                        @if($item->likes->where('user_id', auth()->id())->count())
-                            <form action="{{ route('items.unlike', $item->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="unlike__button liked">☆</button>
-                            </form>
+                        @auth
+                            @if($item->likes->where('user_id', auth()->id())->count())
+                                {{-- いいね解除 --}}
+                                <form action="{{ route('items.unlike', $item->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="like-button liked">
+                                        <i class="far fa-heart fa-2xl"></i>
+                                    </button>
+                                </form>
+                            @else
+                                {{-- いいね --}}
+                                <form action="{{ route('items.like', $item->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="like-button">
+                                        <i class="far fa-heart fa-2xl"></i>
+                                    </button>
+                                </form>
+                            @endif
                         @else
-                            <form action="{{ route('items.like', $item->id) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="like__button">☆</button>
-                            </form>
-                        @endif
-                    @else
-                        <span class="like__icon">☆</span>
-                    @endauth
-                        <span class="like__count">{{ $item->likes->count() }}</span>
+                            <a href="{{ route('login') }}" class="like-button">
+                                <i class="far fa-heart fa-2xl"></i>
+                            </a>
+                        @endauth
+
+
+                        <span class="like-count">{{ $item->likes->count() }}</span>
                     </div>
+
 
                     {{-- コメント --}}
                     <div class="comment-box">
-                        <span class="comment__icon">💬</span>
-                        <span class="comment__count">{{ $item->comments->count() }}</span>
+                        <span class="comment-button">
+                            <i class="far fa-comment fa-2xl"></i>
+                        </span>
+                        <span class="comment-count">{{ $item->comments->count() }}</span>
                     </div>
                 </div>
             </div>
@@ -96,13 +109,38 @@
             </div>
 
             {{-- コメント一覧 --}}
-            <div class="item-content">
-                <h3 class="comment__tittle">コメント({{ $item->comments->count() }})</h3>
-            </div>
-            <div class="item-content">
+            <div class="comments">
+                {{-- タイトル --}}
+                <div class="comment__tittle">
+                    コメント({{ $item->comments->count() }})
+                </div>
+
                 @forelse($item->comments as $comment)
-                    <p class="comment__user">{{ $comment->user->name }}</p>
-                    <p class="comment__show">{{ $comment->comment }}</p>
+                    <div class="comment-item">
+                        {{-- プロフィール画像＋名前 --}}
+                        <div class="comment-header">
+                            <div class="comment-user__image">
+                                @php
+                                    $imgPath = optional($comment->user->profile)->img_url
+                                        ? asset('storage/' . $comment->user->profile->img_url)
+                                        : null;
+                                @endphp
+
+                                @if($imgPath)
+                                    <img src="{{ $imgPath }}" alt="プロフィール画像">
+                                @else
+                                    <div class="comment-user__image--default"></div>
+                                @endif
+                            </div>
+
+                            <p class="comment__user">{{ $comment->user->name }}</p>
+                        </div>
+
+                        {{-- コメント --}}
+                        <div class="comment-body">
+                            <p class="comment__show">{{ $comment->comment }}</p>
+                        </div>
+                    </div>
                 @empty
                     <p class="uncomment">コメントはまだありません。</p>
                 @endforelse

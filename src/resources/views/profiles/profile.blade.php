@@ -21,7 +21,9 @@
             <div class="form__image">
                 <div class="form-group__image">
                 @php
-                    $imgPath = $profile->img_url ? asset('storage/' . $profile->img_url) : null;
+                    $imgPath = isset($profile) && $profile && $profile->img_url
+                        ? asset('storage/' . $profile->img_url)
+                        : null;
                 @endphp
 
                 @if($imgPath)

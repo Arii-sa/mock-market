@@ -87,23 +87,60 @@ class PurchaseTest extends TestCase
 
 
     /** @test プロフィールに購入商品が表示される */
-    public function test_purchased_item_appears_in_profile()
-    {
-        [$user, $item] = $this->prepareData();
-        $user->markEmailAsVerified();
+    /** @test プロフィールに購入商品が表示される */
+public function test_purchased_item_appears_in_profile()
+{
+    // 出品者
+    $seller = User::create([
+        'name' => 'Seller',
+        'email' => 'seller@example.com',
+        'password' => bcrypt('password123'),
+        'email_verified_at' => now(),
+    ]);
 
-        SoldItem::create([
-            'user_id' => $user->id,
-            'item_id' => $item->id,
-            'sending_postcode' => '111-2222',
-            'sending_address' => '東京都港区2-2-2',
-        ]);
+    // 購入者
+    $buyer = User::create([
+        'name' => 'Buyer',
+        'email' => 'buyer@example.com',
+        'password' => bcrypt('password123'),
+        'email_verified_at' => now(),
+    ]);
 
-        $response = $this->actingAs($user)
-            ->get(route('mypage.show'));
+    $buyer->markEmailAsVerified();
+    
+    // ★ プロフィール（これが超重要）
+    $buyer->profile()->create([
+        'postcode' => '111-2222',
+        'address' => '東京都港区2-2-2',
+        'building' => 'テストビル',
+        'img_url' => null,
+    ]);
 
-        $response->assertSee($item->name);
-    }
+
+    $item = Item::create([
+        'user_id' => $seller->id, // ← 出品者
+        'name' => 'テスト商品',
+        'brand' => 'ブランドA',
+        'price' => 3000,
+        'description' => 'これはテスト商品の説明です。',
+        'condition_id' => 1,
+        'img_url' => 'test.jpg',
+    ]);
+
+    // 購入履歴（購入者で紐づける）
+    SoldItem::create([
+        'user_id' => $buyer->id, // ← ★ここが最重要
+        'item_id' => $item->id,
+        'sending_postcode' => '111-2222',
+        'sending_address' => '東京都港区2-2-2',
+    ]);
+
+    $response = $this->actingAs($buyer)
+        ->get(route('mypage.show', ['tab' => 'purchased']));
+
+    $response->assertSee('テスト商品');
+}
+
 
     /** @test 支払い方法を選択すると反映される */
     public function test_selected_payment_method_is_reflected()
