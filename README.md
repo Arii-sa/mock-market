@@ -38,7 +38,7 @@ DB_PASSWORD=laravel_pass
 ```
 mailhog:
     image: mailhog/mailhog:v1.0.1
-    container_name: mock-test-mailhog
+    container_name: mock-market-mailhog
     ports:
       - "1025:1025"
       - "8025:8025"
@@ -54,7 +54,7 @@ docker-compose up -d --build
 
 ```
 MAIL_MAILER=smtp
-MAIL_HOST=mock-test-mailhog
+MAIL_HOST=mock-market-mailhog
 MAIL_PORT=1025
 MAIL_USERNAME=null
 MAIL_PASSWORD=null
@@ -63,15 +63,20 @@ MAIL_FROM_ADDRESS="no-reply@example.com"
 MAIL_FROM_NAME="${APP_NAME}"
 ```
 
-## user のログイン用初期データ
+## 出品user１ のログイン用
 
-- メールアドレス: ono@example.com
+- メールアドレス: sellerA@test.com
+- パスワード: password123
+
+## 出品user２ のログイン用
+
+- メールアドレス: sellerB@test.com
 - パスワード: password1234
 
-## 出品 user のログイン用初期データ
+## 出品なしuser のログイン用
 
-- メールアドレス: test@example.com
-- パスワード: password123
+- メールアドレス: free@test.com
+- パスワード: password12345
 
 ## 使用技術
 
