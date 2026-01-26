@@ -33,6 +33,15 @@ class ProfilesTableSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'user_id' => 3,
+                'img_url' => 'https://example.com/images/user3.png',
+                'postcode' => '987-6544',
+                'address' => '大阪府大阪市中央区4-5',
+                'building' => '大阪マンション301',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 }

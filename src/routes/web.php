@@ -11,17 +11,9 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\AddressController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\TransactionMessageController;
+use App\Http\Controllers\EvaluationController;
 
 
 // 登録画面表示
@@ -151,4 +143,36 @@ Route::get('/items/create', [ItemController::class, 'create'])
 Route::post('/items', [ItemController::class, 'store'])
     ->middleware(['auth', 'verified'])
     ->name('items.store');
+
+// ==========================
+// 取引チャット関連
+// ==========================
+
+// 取引チャット表示
+Route::get('/transactions/{transaction}', [TransactionController::class, 'show'])
+    ->middleware(['auth', 'verified'])
+    ->name('transactions.show');
+
+// 取引チャット メッセージ送信
+Route::post('/transactions/{transaction}/messages', [TransactionMessageController::class, 'store'])
+    ->middleware(['auth', 'verified'])
+    ->name('transactions.messages.store');
+
+Route::post('/transactions/{transaction}/complete',[TransactionController::class, 'complete'])
+    ->middleware(['auth', 'verified'])
+    ->name('transactions.complete');
+
+//メッセージ編集
+Route::post('/transactions/{transaction}/evaluate',[EvaluationController::class, 'store'])
+    ->middleware(['auth', 'verified'])
+    ->name('transactions.evaluate');
+
+Route::put('/transactions/{transaction}/messages/{message}',[TransactionMessageController::class, 'update'])
+    ->middleware(['auth', 'verified'])
+    ->name('transactions.messages.update');
+
+//メッセージ削除
+Route::delete('/transactions/{transaction}/messages/{message}',[TransactionMessageController::class, 'destroy'])
+    ->middleware(['auth', 'verified'])
+    ->name('transactions.messages.destroy');
 

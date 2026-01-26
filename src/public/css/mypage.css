@@ -8,9 +8,8 @@
     align-items: center;
     justify-content: center;
     margin: 40px 0 30px;
-    gap: 40px;
+    gap: 30%;
 }
-
 
 .user-info {
     display: flex;
@@ -50,19 +49,40 @@
     font-weight: bold;
 }
 
+.star-/* マイページ用 星評価 */
+.user-rating {
+    display: flex;
+    gap: 4px;
+    margin-top: 4px;
+}
+
+.user-rating .star {
+    font-size: 25px;
+    color: #ccc;
+}
+
+.user-rating .star.filled {
+    color: #ffd700;
+}
+
 .edit__button {
-    padding: 8px 12px;
+    padding: 8px 25px;
+    margin: 0px 20px;
     border-radius: 5px;
     border: 1px solid #f40303;
     text-decoration: none;
     color: #f40303;
+    font-weight: bold;
 }
 
-.user-edit {
-    display: flex;
-    align-items: center;
+.tab-badge {
+    margin-left: 6px;
+    background: #ff3b3b;
+    color: #fff;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 10px;
 }
-
 
 .mypage-tab {
     display: flex;
@@ -83,7 +103,7 @@
     font-weight: bold;
 }
 
-.tab__name.active{
+.tab__name.active {
     color: #c00;
 }
 
@@ -120,6 +140,34 @@
 
 .item__sold {
     position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: red;
+    color: #fff;
+    padding: 2px 6px;
+    font-size: 12px;
+    border-radius: 4px;
+    z-index: 10;
+}
+
+.item__trading {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: orange;
+    color: #fff;
+    padding: 2px 6px;
+    font-size: 12px;
+    border-radius: 4px;
+    z-index: 10;
+}
+
+.item-image-wrapper {
+    position: relative;
+}
+
+.unread-badge {
+    position: absolute;
     top: 8px;
     left: 8px;
     padding: 4px 8px;
@@ -127,6 +175,5 @@
     color: #fff;
     font-size: 12px;
     font-weight: bold;
-    border-radius: 4px;
+    border-radius: 30px;
 }
-

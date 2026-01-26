@@ -8,6 +8,9 @@ use App\Models\Item;
 use App\Models\SoldItem;
 use App\Http\Requests\ProfileRequest;
 use App\Models\Profile;
+use App\Models\Transaction;
+use App\Models\TransactionMessageRead;
+use App\Enums\ItemStatus;
 
 class ProfileController extends Controller
 {
@@ -52,17 +55,71 @@ class ProfileController extends Controller
         if ($tab === 'purchased') {
             // 購入した商品
             $items = $user->soldItems()
-                ->with('item') // sold_items.item を一緒に取得
+                ->with('item')
                 ->get()
-                ->pluck('item'); // Item モデルだけを抽出
-        } else {
+                ->map(function ($soldItem) {
+                    $item = $soldItem->item;
+                    $item->isSold = $item->status === ItemStatus::SOLD;
+                    return $item;
+                });
+        }elseif ($tab === 'trading') {
+            $items = Transaction::whereIn('status', ['trading', 'completed'])
+                ->where(function ($query) use ($user) {
+                    $query->where('buyer_id', $user->id)
+                          ->orWhere('seller_id', $user->id);
+                })
+                ->with([
+                    'item',
+                    'evaluations',
+                    'messages',
+                    'messageReads' => function ($q) use ($user) {
+                        $q->where('user_id', $user->id);
+                    }
+                ])
+                ->orderByDesc('updated_at')
+                ->get()
+                ->map(function ($transaction) use ($user) {
+
+                    $lastReadId = optional($transaction->messageReads->first())
+                        ->last_read_message_id;
+
+                    $transaction->unread_count = $transaction->messages
+                        ->where('id', '>', $lastReadId ?? 0)
+                        ->where('user_id', '!=', $user->id)
+                        ->count();
+
+                    return $transaction;
+                });
+        }else {
             // 出品した商品
             $items = $user->items()
                 ->withCount(['likes', 'comments'])
                 ->get();
         }
 
-        return view('profiles.mypage', compact('user', 'items', 'tab', 'profile'));
+        // 取引中の未読メッセージ合計
+        $unreadTotal = Transaction::whereIn('status', ['trading', 'completed'])
+            ->where(function ($query) use ($user) {
+                $query->where('buyer_id', $user->id)
+                    ->orWhere('seller_id', $user->id);
+            })
+            ->with(['messages', 'messageReads' => function ($q) use ($user) {
+                $q->where('user_id', $user->id);
+            }])
+            ->get()
+            ->sum(function ($transaction) use ($user) {
+                $lastReadId = optional($transaction->messageReads->first())
+                    ->last_read_message_id;
+
+                return $transaction->messages
+                    ->where('id', '>', $lastReadId ?? 0)
+                    ->where('user_id', '!=', $user->id)
+                    ->count();
+            });
+
+
+        return view('profiles.mypage', compact('user', 'items', 'tab', 'profile', 'unreadTotal'));
+
     }
 
 

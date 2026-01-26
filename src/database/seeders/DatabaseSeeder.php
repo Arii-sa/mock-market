@@ -3,17 +3,26 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+        \App\Models\TransactionMessageRead::truncate();
+        \App\Models\TransactionMessage::truncate();
+        \App\Models\Evaluation::truncate();
+        \App\Models\Transaction::truncate();
+
+        \App\Models\CategoryItem::truncate();
+        \App\Models\Item::truncate();
+        \App\Models\Profile::truncate();
+        \App\Models\User::truncate();
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
         $this->call([
             UsersTableSeeder::class,
             ConditionsTableSeeder::class,
@@ -21,6 +30,10 @@ class DatabaseSeeder extends Seeder
             ItemsTableSeeder::class,
             CategoryItemsTableSeeder::class,
             ProfilesTableSeeder::class,
+
+            TransactionsTableSeeder::class,
+            TransactionMessagesTableSeeder::class,
+            TransactionMessageReadsTableSeeder::class,
         ]);
     }
 }

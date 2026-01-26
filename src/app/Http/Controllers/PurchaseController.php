@@ -8,8 +8,10 @@ use Stripe\PaymentIntent;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\SoldItem;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PurchaseRequest;
+use App\Enums\ItemStatus;
 
 
 class PurchaseController extends Controller
@@ -105,19 +107,24 @@ class PurchaseController extends Controller
             return redirect()->route('items.index')->with('error', 'この商品はすでに購入されています。');
         }
 
-        // --- 購入確定（DB登録） ---
-        SoldItem::create([
-            'user_id' => auth()->id(),
-            'item_id' => $item->id,
-            'sending_postcode' => auth()->user()->profile->postcode ?? '',
-            'sending_address'  => auth()->user()->profile->address ?? '',
-            'sending_building' => auth()->user()->profile->building ?? '',
+        Transaction::firstOrCreate(
+            ['item_id' => $item->id],
+            [
+                'buyer_id'  => auth()->id(),
+                'seller_id' => $item->user_id,
+                'status'    => 'trading',
+            ]
+        );
+
+        $item->update([
+            'status' => ItemStatus::TRADING,
         ]);
 
         // --- セッション削除 ---
         session()->forget("purchase_address.{$item->id}");
 
-        return redirect()->route('items.index')->with('success', '購入が完了しました！');
+        return redirect()->route('mypage.show', ['tab' => 'trading'])
+            ->with('success', '購入が完了しました！取引を開始できます');
     }
 
     public function cancel(Item $item)

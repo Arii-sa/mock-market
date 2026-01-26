@@ -77,11 +77,15 @@
             </div>
 
             {{-- 購入ボタン（例: 購入ページへ遷移） --}}
-            <div class="item-content">
+            @if($item->isAvailable())
                 <a href="{{ route('purchase.create', $item->id) }}" class="item__purchase">
                     購入手続きへ
                 </a>
-            </div>
+            @elseif($item->isTrading())
+                <p class="item__sold-text">現在取引中のため購入できません</p>
+            @else
+                <p class="item__sold-text">売り切れました</p>
+            @endif
 
             {{-- 商品説明 --}}
             <div class="item-content">

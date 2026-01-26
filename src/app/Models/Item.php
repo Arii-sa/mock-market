@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Enums\ItemStatus;
 
 class Item extends Model
 {
@@ -17,6 +18,11 @@ class Item extends Model
         'brand',
         'description',
         'img_url',
+        'status',
+    ];
+
+    protected $casts = [
+        'status' => ItemStatus::class,
     ];
 
     public function user()
@@ -45,16 +51,29 @@ class Item extends Model
         return $this->hasOne(SoldItem::class);
     }
 
-    // isSold を簡便に
-    public function isSold(): bool
-    {
-        return $this->soldItem()->exists();
-    }
-
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'category_items', 'item_id', 'category_id');
     }
 
+    public function transaction()
+    {
+        return $this->hasOne(Transaction::class);
+    }
+
+    public function isAvailable(): bool
+    {
+        return $this->status === ItemStatus::AVAILABLE;
+    }
+
+    public function isTrading(): bool
+    {
+        return $this->status === ItemStatus::TRADING;
+    }
+
+    public function isSold(): bool
+    {
+        return $this->status === ItemStatus::SOLD;
+    }
 
 }

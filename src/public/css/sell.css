@@ -1,7 +1,7 @@
 .sell-content {
     max-width: 700px;
     margin: 50px auto;
-    font-family: 'Noto Sans JP', sans-serif;
+    font-family: "Noto Sans JP", sans-serif;
 }
 
 .title-top {
@@ -12,11 +12,11 @@
     padding-bottom: 10px;
 }
 
-.content-title{
+.content-title {
     border-bottom: 2px solid #ccc;
 }
 
-.title-text{
+.title-text {
     margin-bottom: 3px;
 }
 
@@ -28,7 +28,7 @@
     margin-bottom: 25px;
 }
 
-.sell-detail{
+.sell-detail {
     margin: 20px 0px;
 }
 
@@ -51,7 +51,6 @@
     resize: none;
 }
 
-
 .img-box {
     border: 1px dashed #ccc;
     border-radius: 6px;
@@ -72,10 +71,9 @@
 }
 
 .upload-btn:hover {
-background-color: #f40303;
-color: #fff;
+    background-color: #f40303;
+    color: #fff;
 }
-
 
 .item-img {
     display: block;
@@ -103,20 +101,17 @@ color: #fff;
     transition: 0.2s;
 }
 
-
 .category-item:checked + .item-category {
     background-color: #f40303;
     color: #fff;
     border-color: #f40303;
 }
 
-
 .item-error {
     color: red;
     font-size: 13px;
     margin-top: 5px;
 }
-
 
 .content-button {
     text-align: center;

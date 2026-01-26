@@ -21,9 +21,10 @@ class CreateItemsTable extends Migration
             $table->integer('price');
             $table->text('description');
             $table->string('img_url');
+            $table->string('status')->default('available');
             $table->timestamps();
         });
-        
+
     }
 
     /**

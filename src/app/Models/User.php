@@ -74,4 +74,41 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(SoldItem::class);
     }
 
+    // 購入者としての取引
+    public function boughtTransactions()
+    {
+        return $this->hasMany(Transaction::class, 'buyer_id');
+    }
+
+    // 出品者としての取引
+    public function soldTransactions()
+    {
+        return $this->hasMany(Transaction::class, 'seller_id');
+    }
+
+    // 自分が送信した取引メッセージ
+    public function transactionMessages()
+    {
+        return $this->hasMany(TransactionMessage::class);
+    }
+
+    // 自分が受け取った評価
+    public function receivedEvaluations()
+    {
+        return $this->hasMany(Evaluation::class, 'to_user_id');
+    }
+
+    // 自分が送った評価
+    public function givenEvaluations()
+    {
+        return $this->hasMany(Evaluation::class, 'from_user_id');
+    }
+
+    public function getAverageRatingAttribute()
+    {
+        $avg = $this->receivedEvaluations()->avg('score');
+
+        return $avg ? round($avg) : null;
+    }
+
 }

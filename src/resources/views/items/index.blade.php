@@ -36,9 +36,12 @@
                             src="{{ asset('storage/' . $item->img_url) }}"
                             alt="{{ $item->name }}">
                     </a>
-                    @if(method_exists($item, 'isSold') ? $item->isSold() : (isset($item->sold_item)))
-                    <span class="card__sold">Sold</span>
+                    @if($item->isSold())
+                        <span class="card__sold">Sold</span>
+                    @elseif($item->isTrading())
+                        <span class="card__trading">取引中</span>
                     @endif
+
                     <div class="card__detail">
                         <p class="card__name">{{ $item->name }}</p>
                     </div>
