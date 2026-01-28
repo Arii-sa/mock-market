@@ -8,6 +8,7 @@ use App\Http\Requests\TransactionMessageRequest;
 use App\Models\Transaction;
 use App\Models\TransactionMessage;
 
+
 class TransactionMessageController extends Controller
 {
     public function store(TransactionMessageRequest $request, Transaction $transaction)
@@ -21,6 +22,8 @@ class TransactionMessageController extends Controller
                 : null,
         ]);
 
+        session()->forget("draft_{$transaction->id}");
+        
         $transaction->touch();
 
         return redirect()->route('transactions.show', $transaction);
@@ -45,6 +48,7 @@ class TransactionMessageController extends Controller
         return redirect()
             ->route('transactions.show', $transaction);
     }
+
 
     /**
      * メッセージ削除

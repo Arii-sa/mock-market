@@ -58,53 +58,30 @@ body {
     margin: 0;
 }
 
-.sidebar-item {
-    display: block;
-    width: 197px;
-    margin: 24px auto;
-    padding: 10px;
-
-    background: #fff;
-    border-radius: 6px;
-    text-decoration: none;
-    color: #000;
-    font-size: 17px;
-    text-align: center;
-}
-
-.sidebar-item:hover {
-    background: #eee;
-}
-
 .transaction-main {
     flex: 1;
+    overflow-y: auto;
+    min-width: 0;
 }
 
 @media (min-width: 1400px) and (max-width: 1540px) {
-    .transaction-main {
-        padding: 24px;
-    }
-
-    .transaction-container {
-        max-width: 1400px;
+    .transaction-sidebar {
+        width: 275px;
     }
 }
 
+/* レスポンシブ対応 */
 @media (min-width: 768px) and (max-width: 850px) {
     .transaction-sidebar {
-        width: 220px;
+        width: 180px;
+        padding: 16px 8px;
     }
 
-    .sidebar-item {
-        width: 180px;
-        font-size: 15px;
+    .sidebar-title-box {
+        width: 150px;
     }
 
     .sidebar-title {
-        font-size: 24px;
-    }
-
-    .transaction-main {
-        padding: 12px;
+        font-size: 25px;
     }
 }

@@ -144,10 +144,6 @@ Route::post('/items', [ItemController::class, 'store'])
     ->middleware(['auth', 'verified'])
     ->name('items.store');
 
-// ==========================
-// 取引チャット関連
-// ==========================
-
 // 取引チャット表示
 Route::get('/transactions/{transaction}', [TransactionController::class, 'show'])
     ->middleware(['auth', 'verified'])
@@ -161,6 +157,9 @@ Route::post('/transactions/{transaction}/messages', [TransactionMessageControlle
 Route::post('/transactions/{transaction}/complete',[TransactionController::class, 'complete'])
     ->middleware(['auth', 'verified'])
     ->name('transactions.complete');
+
+Route::post('/transactions/{transaction}/draft-and-redirect', [TransactionController::class, 'draftAndRedirect'])
+    ->name('transactions.draft-and-redirect');
 
 //メッセージ編集
 Route::post('/transactions/{transaction}/evaluate',[EvaluationController::class, 'store'])

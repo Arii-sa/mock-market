@@ -4,13 +4,36 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use App\Enums\ItemStatus;
 
 class ItemsTableSeeder extends Seeder
 {
     public function run()
     {
-        //
+        $images = [
+        1 => 'clock.jpg',
+        2 => 'disk.png',
+        3 => 'onion.png',
+        4 => 'shoes.png',
+        5 => 'pc.png',
+        6 => 'mic.png',
+        7 => 'bag.png',
+        8 => 'tumbler.png',
+        9 => 'coffee.png',
+        10 => 'cosme.png',
+        ];
+
+        foreach ($images as $id => $fileName) {
+            $from = database_path("seeders/images/{$fileName}");
+            $to   = "items/{$fileName}";
+
+            if (!Storage::disk('public')->exists($to)) {
+                Storage::disk('public')->put($to, File::get($from));
+            }
+        }
+
         DB::table('items')->insert([
             [
                 'id' => 1,
@@ -20,7 +43,7 @@ class ItemsTableSeeder extends Seeder
                 'price' => 15000,
                 'brand' => 'Rolax',
                 'description' => 'スタイリッシュなデザインのメンズ腕時計',
-                'img_url' => 'images/clock.jpg',
+                'img_url' => 'items/clock.jpg',
                 'status' => ItemStatus::TRADING->value,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -33,7 +56,7 @@ class ItemsTableSeeder extends Seeder
                 'price' => 5000,
                 'brand' => '西芝',
                 'description' => '高速で信頼性の高いハードディスク',
-                'img_url' => 'images/disk.png',
+                'img_url' => 'items/disk.png',
                 'status' => ItemStatus::AVAILABLE->value,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -46,7 +69,7 @@ class ItemsTableSeeder extends Seeder
                 'price' => 300,
                 'brand' => null,
                 'description' => '新鮮な玉ねぎ3束のセット',
-                'img_url' => 'images/onion.png',
+                'img_url' => 'items/onion.png',
                 'status' => ItemStatus::AVAILABLE->value,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -59,7 +82,7 @@ class ItemsTableSeeder extends Seeder
                 'price' => 4000,
                 'brand' => null,
                 'description' => 'クラシックなデザインの革靴',
-                'img_url' => 'images/shoes.png',
+                'img_url' => 'items/shoes.png',
                 'status' => ItemStatus::AVAILABLE->value,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -72,7 +95,7 @@ class ItemsTableSeeder extends Seeder
                 'price' => 45000,
                 'brand' => null,
                 'description' => '高性能なノートパソコン',
-                'img_url' => 'images/pc.png',
+                'img_url' => 'items/pc.png',
                 'status' => ItemStatus::AVAILABLE->value,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -85,7 +108,7 @@ class ItemsTableSeeder extends Seeder
                 'price' => 8000,
                 'brand' => null,
                 'description' => '高音質のレコーディング用マイク',
-                'img_url' => 'images/mic.png',
+                'img_url' => 'items/mic.png',
                 'status' => ItemStatus::TRADING->value,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -98,7 +121,7 @@ class ItemsTableSeeder extends Seeder
                 'price' => 3500,
                 'brand' => null,
                 'description' => 'おしゃれなショルダーバッグ',
-                'img_url' => 'images/bag.png',
+                'img_url' => 'items/bag.png',
                 'status' => ItemStatus::AVAILABLE->value,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -111,7 +134,7 @@ class ItemsTableSeeder extends Seeder
                 'price' => 500,
                 'brand' => null,
                 'description' => '使いやすいタンブラー',
-                'img_url' => 'images/tumbler.png',
+                'img_url' => 'items/tumbler.png',
                 'status' => ItemStatus::AVAILABLE->value,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -124,7 +147,7 @@ class ItemsTableSeeder extends Seeder
                 'price' => 4000,
                 'brand' => 'Starbacks',
                 'description' => '手動のコーヒーミル',
-                'img_url' => 'images/coffee.png',
+                'img_url' => 'items/coffee.png',
                 'status' => ItemStatus::AVAILABLE->value,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -137,7 +160,7 @@ class ItemsTableSeeder extends Seeder
                 'price' => 2500,
                 'brand' => null,
                 'description' => '便利なメイクアップセット',
-                'img_url' => 'images/cosme.png',
+                'img_url' => 'items/cosme.png',
                 'status' => ItemStatus::AVAILABLE->value,
                 'created_at' => now(),
                 'updated_at' => now(),

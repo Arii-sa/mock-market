@@ -62,7 +62,7 @@
             <div class="content-tab">
                 <a class="tab__name {{ $tab === 'trading' ? 'active' : '' }}"
                 href="{{ route('mypage.show', ['tab' => 'trading']) }}">
-                    取引中
+                    取引中の商品
 
                     @if($unreadTotal > 0)
                         <span class="tab-badge">{{ $unreadTotal }}</span>
@@ -87,7 +87,7 @@
                                         {{ $transaction->unread_count }}
                                     </span>
                                 @endif
-                                
+
                             </div>
                         </a>
                         <p class="item__name">{{ $transaction->item->name }}</p>

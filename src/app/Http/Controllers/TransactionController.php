@@ -9,9 +9,26 @@ use App\Mail\TransactionCompletedMail;
 use App\Models\Transaction;
 use App\Models\SoldItem;
 use App\Enums\ItemStatus;
+use App\Models\TransactionMessage;
+
 
 class TransactionController extends Controller
 {
+    public function draftAndRedirect(Request $request, Transaction $transaction)
+    {
+        $body = $request->input('body', '');
+        $redirectTo = $request->input('redirect_to');
+
+        if (!empty(trim($body))) {
+            session()->put("draft_{$transaction->id}", $body);
+        }else {
+
+            session()->forget("draft_{$transaction->id}");
+        }
+
+        return redirect()->route('transactions.show', $redirectTo);
+    }
+
     public function show(Transaction $transaction)
     {
         $user = Auth::user();
@@ -19,6 +36,7 @@ class TransactionController extends Controller
         if ($user->id !== $transaction->buyer_id && $user->id !== $transaction->seller_id) {
             abort(403);
         }
+
 
         $messages = $transaction->messages()
             ->withTrashed()
@@ -36,6 +54,7 @@ class TransactionController extends Controller
                 [   'last_read_message_id' => $lastMessage->id]
             );
         }
+
 
         $otherTransactions = Transaction::whereIn('status', ['trading', 'completed'])
             ->where(function ($q) use ($user) {
@@ -67,6 +86,8 @@ class TransactionController extends Controller
 
         $editingMessageId = request('edit_message_id');
 
+        $draftBody = session("draft_{$transaction->id}", '');
+
         // 表示するBladeを切り替え
         return view(
             $user->id === $transaction->buyer_id
@@ -76,9 +97,11 @@ class TransactionController extends Controller
                     'messages',
                     'showEvaluationModal',
                     'otherTransactions',
-                    'editingMessageId')
+                    'editingMessageId',
+                    'draftBody')
         );
     }
+
 
     public function complete(Request $request, Transaction $transaction)
     {
@@ -118,5 +141,8 @@ class TransactionController extends Controller
         ->with('showEvaluationModal', true);
     }
 
+    
+
 }
+
 

@@ -180,6 +180,14 @@
 
                 {{-- 通常送信モード --}}
                 @else
+                    <div class="error-message">
+                        @error('body')
+                            <div class="text__error">{{ $message }}</div>
+                        @enderror
+                        @error('image')
+                            <div class="text__error">{{ $message }}</div>
+                        @enderror
+                    </div>
                     <form class="chat-form"
                         method="POST"
                         action="{{ route('transactions.messages.store', $transaction) }}"
@@ -187,25 +195,26 @@
                         @csrf
 
                         <div class="text-body">
-                            <div class="error-message">
-                                @error('body')
-                                    <div class="text__error">{{ $message }}</div>
-                                @enderror
-                            </div>
                             <input class="message-text"
                                 type="text" name="body"
                                 placeholder="取引メッセージを記入してください"
-                                value="{{ old('body') }}">
-
+                                value="{{ old('body', $draftBody ?? '') }}">
+                                {{-- サイドバーボタンを仮保存ボタンとして埋め込み --}}
+                            <div class="draft-save-buttons">
+                                @forelse ($otherTransactions ?? [] as $t)
+                                    <button class="sidebar-draft-btn" 
+                                            type="submit"
+                                            formaction="{{ route('transactions.draft-and-redirect', $transaction) }}"
+                                            name="redirect_to"
+                                            value="{{ $t->id }}">
+                                        {{ $t->item->name }}
+                                    </button>
+                                @empty
+                                @endforelse
+                            </div>
                         </div>
 
                         <div class="image-body">
-                            <div class="error-message">
-                                @error('image')
-                                    <div class="text__error">{{ $message }}</div>
-                                @enderror
-                            </div>
-
                             <label for="send-image" class="image-upload-btn">
                                 画像を追加
                             </label>

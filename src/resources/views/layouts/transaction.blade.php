@@ -25,13 +25,6 @@
             <div class="sidebar-title-box">
                 <p class="sidebar-title">その他の取引</p>
             </div>
-            @forelse ($otherTransactions ?? [] as $t)
-                <a href="{{ route('transactions.show', $t) }}" class="sidebar-item">
-                    {{ $t->item->name }}
-                </a>
-            @empty
-                {{-- 何も表示しない（枠だけ） --}}
-            @endforelse
         </aside>
 
         {{-- メイン --}}

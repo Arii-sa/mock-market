@@ -41,7 +41,7 @@
     display: flex;
     align-items: center;
     gap: 32px;
-    padding: 24px 32px;
+    padding: 12px 32px;
     background: #ffffff;
     border-bottom: 1px solid #575757;
 }
@@ -76,8 +76,7 @@
     font-size: 18px;
 }
 
-/* チャット*/
-
+/* チャット */
 .chat-area {
     display: flex;
     flex-direction: column;
@@ -100,14 +99,22 @@
     display: flex;
     flex-direction: column;
 }
+
 .name-body {
     display: flex;
     gap: 12px;
+    align-items: center;
 }
 
 .chat-user.left {
-    justify-content: flex-start;
+    align-items: flex-start;
     padding-left: 30px;
+}
+
+.message-sender {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 6px;
 }
 
 .chat-user.right {
@@ -121,18 +128,13 @@
     border-radius: 50%;
     object-fit: cover;
 }
+
 .chat-user-image--default {
     background: #d9d9d9;
 }
 
 .message-body {
     max-width: 300px;
-}
-
-.message-sender {
-    font-size: 12px;
-    font-weight: bold;
-    margin-bottom: 6px;
 }
 
 .message-content {
@@ -143,6 +145,7 @@
     font-size: 13px;
     font-weight: bold;
     line-height: 1.6;
+    word-wrap: break-word;
 }
 
 .chat.me {
@@ -169,6 +172,18 @@
     font-style: italic;
 }
 
+.message-image {
+    margin-top: 6px;
+}
+
+.message-image img {
+    max-width: 200px;
+    border-radius: 6px;
+    display: block;
+}
+
+/* メッセージアクションボタン */
+
 .message-actions {
     margin: auto;
     text-align: right;
@@ -182,21 +197,42 @@
     text-decoration: none;
 }
 
-.message-image {
-    margin-top: 6px;
-}
-
-.message-image img {
-    max-width: 200px;
+/* 削除 */
+.delete-confirm {
+    background: #fff3f3;
+    border: 1px solid #ffb3b3;
+    padding: 20px;
     border-radius: 6px;
-    display: block;
+    margin-bottom: 24px;
+    text-align: center;
 }
 
-.error-message {
-    color: #ff5555;
+.delate-btn {
+    background: #ff6b6b;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
 }
 
+.delate-cancel-btn {
+    margin-left: 16px;
+    text-decoration: none;
+}
+
+/* メッセージ入力送信エリア */
+.send-message {
+    width: 100%;
+    padding: 16px 32px;
+    background: #ffffff;
+    flex-shrink: 0;
+    min-height: 100px;
+}
 /* 編集 */
+.editing-label {
+    font-size: 13px;
+    margin-bottom: 8px;
+}
 
 .edit-actions {
     margin-top: 8px;
@@ -221,39 +257,7 @@
     text-decoration: underline;
 }
 
-/* 削除 */
-
-.delete-confirm {
-    background: #fff3f3;
-    border: 1px solid #ffb3b3;
-    padding: 20px;
-    border-radius: 6px;
-    margin-bottom: 24px;
-    text-align: center;
-}
-
-.delate-btn {
-    background: #ff6b6b;
-    color: #ffffff;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-}
-
-.delate-cancel-btn {
-    margin-left: 16px;
-    text-decoration: none;
-}
-
-/* 送信 */
-
-.send-message {
-    width: 100%;
-    padding: 16px 32px;
-    background: #ffffff;
-    flex-shrink: 0;
-}
-
+/* 通常メッセージ */
 .chat-form {
     display: flex;
     align-items: center;
@@ -291,11 +295,9 @@
     color: #ff5555;
     font-size: 14px;
     font-weight: bold;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     cursor: pointer;
     transition: 0.2s;
 }
@@ -316,46 +318,114 @@
     height: 40px;
 }
 
-/* 編集*/
-
-.editing-label {
-    font-size: 13px;
-    margin-bottom: 8px;
+.error-message {
+    color: #ff5555;
 }
 
-/* レスポンシブ */
+/* サイドバーボタンエリア */
+.draft-save-buttons {
+    position: fixed;
+    left: 16px;
+    top: 140px;
+    width: 227px;
+    z-index: 100;
+}
+
+.sidebar-draft-btn {
+    display: block;
+    width: 197px;
+    margin: 24px auto;
+    padding: 10px;
+    background: white;
+    border: none;
+    border-radius: 6px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 17px;
+    color: #000;
+    transition: background 0.2s;
+}
+
+.sidebar-draft-btn:hover {
+    background: #eee;
+}
+
+/* -----------------------------
+   レスポンシブ
+--------------------------------*/
+
+/* PC 1400-1540px */
 @media (min-width: 1400px) and (max-width: 1540px) {
-    .transaction-container {
-        max-width: 1400px;
-        margin: 0 auto;
+    .transaction-item {
+        gap: 24px;
     }
 
-    .chat-body {
-        max-width: 560px;
+    .seller-transaction-header,
+    .transaction-item,
+    .send-message {
+        padding-left: 24px;
+        padding-right: 24px;
     }
 }
-
+/* タブレット 768-850px  */
 @media (min-width: 768px) and (max-width: 850px) {
+    .transaction-sidebar {
+        width: 180px;
+        height: calc(100vh - 80px);
+        padding: 16px 8px;
+    }
+
+    .transaction-main {
+        flex: 1;
+        width: calc(100% - 180px);
+    }
+
+    .sidebar-title-box {
+        width: 150px;
+    }
+
+    .sidebar-title {
+        font-size: 25px;
+    }
+
     .transaction-item {
-        flex-direction: column;
-        align-items: flex-start;
+        gap: 16px;
+        padding: 16px;
     }
 
     .image-detail {
-        width: 100%;
-        height: 220px;
+        width: 120px;
+        height: 120px;
     }
 
-    .chat-body {
+    .item-image {
         max-width: 100%;
+        max-height: 100%;
     }
 
-    .chat-form {
-        flex-direction: column;
-        align-items: stretch;
+    .chat-area {
+        padding: 0 12px;
     }
 
-    .btn-mark {
-        align-self: flex-end;
+    .text-body .message-text {
+        height: 40px;
+    }
+
+    .image-body,
+    .image-upload-btn {
+        width: 80px;
+        height: 32px;
+        font-size: 12px;
+    }
+
+    .btn-mark-img {
+        width: 32px;
+        height: 32px;
+    }
+
+    .sidebar-draft-btn {
+        width: 130px;
+        font-size: 12px;
+        margin: 20px 10px;
     }
 }
